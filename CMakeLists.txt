@@ -24,8 +24,8 @@ install(
 install(
     EXPORT communications-config
     NAMESPACE communications::
-    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/communications)
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake)
 
 install(
     DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/include/
-    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/communications)
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
