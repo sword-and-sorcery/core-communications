@@ -15,17 +15,3 @@ target_include_directories(
     communications PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/>
     $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
-
-install(
-    TARGETS communications
-    EXPORT communications-config
-    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
-
-install(
-    EXPORT communications-config
-    NAMESPACE communications::
-    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake)
-
-install(
-    DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/include/
-    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
