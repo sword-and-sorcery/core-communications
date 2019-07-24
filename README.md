@@ -1,5 +1,7 @@
 # core-communications
 
+> ⚠️ **Full docs**: https://sword-and-sorcery.github.io/sword-and-sorcery/
+
 Module dedicated to communications
 
 ```
