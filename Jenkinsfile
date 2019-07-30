@@ -14,7 +14,7 @@ node {
 
         stage("Get dependencies and create app") {
             client.run(command: "remote add inexorgame https://api.bintray.com/conan/inexorgame/inexor-conan")
-            client.run(command: "install grpc/1.17.2@inexorgame/stable --build grpc")
+            client.run(command: "install grpc/1.17.2@inexorgame/stable --build missing")
             String createCommand = "create . sword/sorcery"
             client.run(command: createCommand)
         }
