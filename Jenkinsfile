@@ -4,6 +4,8 @@
      * Set CONAN_USER_HOME to a fixed location.
         The problema is that the first job needs to actually add the remote while the
         following ones don't need to (call to 'client.remote.add' should not fail).
+
+        Requires: https://github.com/jfrog/jenkins-artifactory-plugin/pull/179
 */
 
 def artifactory_name = "Artifactory Docker"
