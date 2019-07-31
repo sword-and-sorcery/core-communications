@@ -1,10 +1,11 @@
-def artifactory_name = "Artifactory Docker"
-def artifactory_repo = "conan-local"
+def artifactory_name = "Artifactory Docker Registered"
+def artifactory_repo = "conan-local-registered"
 String docker_image = "conanio/gcc8"
 
 node {
-    docker.image(docker_image).inside('-v /tmp:/tmp --net=docker_jenkins_artifactory') {
+    docker.image(docker_image).inside('--net=docker_jenkins_artifactory') {
         def server = Artifactory.server artifactory_name
+        //def client = Artifactory.newConanClient(userHome: "${env.WORKSPACE}/conan_home".toString())
         def client = Artifactory.newConanClient()
         def remoteName = client.remote.add server: server, repo: artifactory_repo
 
@@ -13,7 +14,8 @@ node {
         }
 
         stage("Get dependencies and create app") {
-            client.run(command: "remote add inexorgame https://api.bintray.com/conan/inexorgame/inexor-conan")
+            //client.run(command: "remote add --force inexorgame https://api.bintray.com/conan/inexorgame/inexor-conan")
+            client.run(command: "remote add --force conan-local-public http://localhost:8081/artifactory/api/conan/conan-local")
             String createCommand = "create . sword/sorcery"
             client.run(command: createCommand)
         }
