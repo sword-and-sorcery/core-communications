@@ -23,7 +23,7 @@ node {
         }
 
         stage("Get dependencies and create app") {
-            String createCommand = "create . sword/sorcery"
+            String createCommand = "create --update . sword/sorcery"  // Use 'update' to check for latest revision
             client.run(command: createCommand)
         }
 
