@@ -14,7 +14,7 @@ node {
     docker.image(docker_image).inside('--net=docker_jenkins_artifactory') {
         def server = Artifactory.server artifactory_name
         def client = Artifactory.newConanClient(userHome: "${env.WORKSPACE}/conan_home".toString())
-        def remoteName = client.remote.add server: server, repo: artifactory_repo, force: false
+        def remoteName = client.remote.add server: server, repo: artifactory_repo, force: true
 
         stage("Get project") {
               checkout scm
