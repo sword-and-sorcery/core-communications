@@ -7,7 +7,7 @@ node {
         def server = Artifactory.server artifactory_name
         //def client = Artifactory.newConanClient(userHome: "${env.WORKSPACE}/conan_home".toString())
         def client = Artifactory.newConanClient()
-        client.run(command: "config set general.revisions_enabled = 1")
+        client.run(command: "config set general.revisions_enabled=1")
         def remoteName = client.remote.add server: server, repo: artifactory_repo
 
         stage("Get project") {
