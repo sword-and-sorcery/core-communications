@@ -1,5 +1,5 @@
 def artifactory_name = "Artifactory Docker Registered"
-def artifactory_repo = "conan-local-registered"
+def artifactory_repo = "conan-local-protected"
 String docker_image = "conanio/gcc8"
 
 node {
