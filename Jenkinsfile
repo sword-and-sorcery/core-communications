@@ -16,6 +16,7 @@ node {
         stage("Get dependencies and create app") {
             //client.run(command: "remote add --force inexorgame https://api.bintray.com/conan/inexorgame/inexor-conan")
             client.run(command: "remote add --force conan-local-public http://localhost:8081/artifactory/api/conan/conan-local")
+            client.run(command: "remote list")
             String createCommand = "create . sword/sorcery"
             client.run(command: createCommand)
         }
