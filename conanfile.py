@@ -16,7 +16,7 @@ class CoreCommunications(ConanFile):
 
     def requirements(self):
         self.requires("core-messages/0.0@sword/sorcery")
-        self.requires("grpc/1.20.0@inexorgame/stable")
+        self.requires("grpc/1.25.0@inexorgame/stable")
 
     def build(self):
         cmake = CMake(self)
