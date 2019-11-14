@@ -7,6 +7,10 @@ docker_runs["conanio-gcc7"] = ["conanio/gcc7", "conanio-gcc7"]
 
 def user_channel = "sword/sorcery"
 
+String determineRepoName() {
+    return scm.getUserRemoteConfigs()[0].getUrl().tokenize('/')[3].split("\\.")[0]
+}
+
 def get_stages(id, docker_image, artifactory_name, artifactory_repo, profile, user_channel) {
     return {
         node {
@@ -137,7 +141,7 @@ node {
 
                     // Trigger dependents jobs
                     def organization = "sword-and-sorcery"
-                    def repository = "core-messages"
+                    def repository = determineRepoName()
                     def sha1 = checkout(scm).GIT_COMMIT
 
                     def projects = ["ui-board-imgui/0.0@${user_channel}", "core-communications/0.0@${user_channel}"]  // TODO: Get list dinamically
