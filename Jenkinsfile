@@ -82,11 +82,6 @@ docker_runs.each { id, values ->
 node {
     try {
         stage("Build + upload") {
-            sh 'env > env.txt'
-            readFile('env.txt').split("\r?\n").each {
-                println it
-            }
-            
             withEnv(["CONAN_HOOK_ERROR_LEVEL=40"]) {
                 parallel stages
             }
