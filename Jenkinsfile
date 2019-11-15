@@ -45,6 +45,7 @@ def get_stages(id, docker_image, artifactory_name, artifactory_repo, profile, us
                         client.run(command: uploadCommand)
                     }
 
+                    /*
                     stage("Compute build info") {
                         def buildInfo = Artifactory.newBuildInfo()
                         String artifactory_credentials = "http://artifactory:8081/artifactory,admin,password"
@@ -63,6 +64,7 @@ def get_stages(id, docker_image, artifactory_name, artifactory_repo, profile, us
                         echo "Stash '${id}' -> '${buildInfoFilename}'"
                         stash name: id, includes: "${buildInfoFilename}"
                     }
+                    */
                 }
                 finally {
                     deleteDir()
@@ -87,6 +89,7 @@ node {
             }
         }
 
+        /*
         stage("Retrieve build info") {
             docker.image("conanio/gcc8").inside("--net=docker_jenkins_artifactory") {
                 def buildInfo = Artifactory.newBuildInfo()
@@ -110,6 +113,7 @@ node {
                 sh publish_command
             }
         }
+        */
 
         stage("Launch job-graph") {
             docker.image("conanio/gcc8").inside("--net=docker_jenkins_artifactory") {
