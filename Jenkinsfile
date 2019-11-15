@@ -7,10 +7,6 @@ docker_runs["conanio-gcc7"] = ["conanio/gcc7", "conanio-gcc7"]
 
 def user_channel = "sword/sorcery"
 
-String determineRepoName() {
-    return scm.getUserRemoteConfigs()[0].getUrl().tokenize('/')[3].split("\\.")[0]
-}
-
 def get_stages(id, docker_image, artifactory_name, artifactory_repo, profile, user_channel) {
     return {
         node {
@@ -29,10 +25,9 @@ def get_stages(id, docker_image, artifactory_name, artifactory_repo, profile, us
                         echo 'Running in ${docker_image}'
                     }
 
-                    stage("Get project") {
-                        checkout scm
-                    }
-
+                    def scmVars = checkout scm
+                    def repo_name = scmVars.GIT_URL.tokenize('/')[3].split("\\.")[0]
+                    
                     stage("Get dependencies and create app") {
                         String arguments = "--profile ${profile} --lockfile=${lockfile}"
                         client.run(command: "graph lock . ${arguments}".toString())
@@ -41,7 +36,7 @@ def get_stages(id, docker_image, artifactory_name, artifactory_repo, profile, us
                     }
 
                     stage("Upload packages") {
-                        String uploadCommand = "upload core-messages* --all -r ${remoteName} --confirm"
+                        String uploadCommand = "upload ${repo_name}* --all -r ${remoteName} --confirm"
                         client.run(command: uploadCommand)
                     }
 
