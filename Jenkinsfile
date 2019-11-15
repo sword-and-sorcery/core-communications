@@ -117,9 +117,10 @@ node {
 
         stage("Launch job-graph") {
             docker.image("conanio/gcc8").inside("--net=docker_jenkins_artifactory") {
-                stage("Get project") {
-                    checkout scm
-                }
+                def scmVars = checkout scm
+                //stage("Get project") {
+                //    checkout scm
+                //}
 
                 stage("Configure Conan client") {
                     sh "conan config install -sf conan/config https://github.com/sword-and-sorcery/sword-and-sorcery.git"
@@ -140,8 +141,8 @@ node {
 
                     // Trigger dependents jobs
                     def organization = "sword-and-sorcery"
-                    def repository = determineRepoName()
-                    def sha1 = checkout(scm).GIT_COMMIT
+                    def repository = scmVars.GIT_URL.tokenize('/')[3].split("\\.")[0]
+                    def sha1 = scmVars.GIT_COMMIT
 
                     def projects = ["ui-board-imgui/0.0@${user_channel}", "core-communications/0.0@${user_channel}"]  // TODO: Get list dinamically
                     projects.each {project_id -> 
