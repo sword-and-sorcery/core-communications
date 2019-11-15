@@ -144,7 +144,7 @@ node {
                     def repository = scmVars.GIT_URL.tokenize('/')[3].split("\\.")[0]
                     def sha1 = scmVars.GIT_COMMIT
 
-                    def projects = ["ui-board-imgui/0.0@${user_channel}", "core-communications/0.0@${user_channel}"]  // TODO: Get list dinamically
+                    def projects = ["ui-board-imgui/0.0@${user_channel}", ]  // TODO: Get list dinamically
                     projects.each {project_id -> 
                         def json = """{"parameter": [{"name": "reference", "value": "${reference}"}, \
                                                 {"name": "project_id", "value": "${project_id}"}, \
